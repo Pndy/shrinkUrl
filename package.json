@@ -1,0 +1,22 @@
+{
+  "name": "shrinkurl",
+  "version": "1.0.0",
+  "description": "shorten long urls",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pndy/shrinkUrl.git"
+  },
+  "author": "Pndy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pndy/shrinkUrl/issues"
+  },
+  "homepage": "https://github.com/Pndy/shrinkUrl#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
