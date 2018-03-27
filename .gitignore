@@ -58,4 +58,4 @@ typings/
 .env
 
 # Secret data
-config/keys.js
+config/
