@@ -7,21 +7,19 @@ var express = require('express'),
 var app = express()
 
 //SSL Path
-var options = {
+var ssl = {
   cert: fs.readFileSync('./config/ssl/fullchain.pem'),
   key: fs.readFileSync('./config/ssl/privkey.pem')
 }
 
 //Routes
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+app.use('/', require('./routes/routes.js'))
 
 //Server listeners
 var http = app.listen(3000, () => {
   console.log("Listening on port 3000")
 })
 
-var server = https.createServer(options, app).listen(3001, () => {
+var server = https.createServer(ssl, app).listen(3001, () => {
   console.log("Listening on port 3001 for https")
 })

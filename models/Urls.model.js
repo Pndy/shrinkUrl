@@ -5,9 +5,6 @@ var Schema = mongoose.Schema
 
 //Schema rules
 var UserSchema = new Schema({
-  id: {
-    
-  },
   email: {
     type: String,
     unique: true,
