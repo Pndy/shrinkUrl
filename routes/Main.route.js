@@ -2,7 +2,7 @@ var router = require("express").Router();
 
 //Main route
 router.get('/', (req, res) => {
-    res.send('Hello world')
+    res.render('pages/index')
 })
 
 //Info Route
@@ -12,7 +12,10 @@ router.use('/a', require('./Auth.route.js'))
 
 //Route for anything else, for shortened urls, provided by :shortId
 router.get('/:shortId', (req, res) => {
-    res.send('URL: ' + req.params.shortId)
+    if (req.originalUrl.endsWith('?'))
+        res.redirect('/info/' + req.params.shortId)
+    else
+        res.send('URL: ' + req.params.shortId)
 })
 
 

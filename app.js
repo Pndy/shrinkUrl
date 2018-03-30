@@ -6,6 +6,10 @@ var express = require('express'),
 // Express setup
 var app = express()
 
+//Set view engine as ejs
+app.set('view engine', 'ejs')
+
+
 //SSL Path
 var ssl = {
   cert: fs.readFileSync('./config/ssl/fullchain.pem'),
@@ -13,7 +17,7 @@ var ssl = {
 }
 
 //Routes
-app.use('/', require('./routes/routes.js'))
+app.use('/', require('./routes/Main.route.js'))
 
 //Server listeners
 var http = app.listen(3000, () => {
