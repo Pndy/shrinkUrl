@@ -1,0 +1,36 @@
+<html lang="en">
+  
+  <head>
+    <% include ../partials/head %>
+  </head>
+  
+  <body>
+    
+    <header>
+      <% include ../partials/header %>
+    </header>
+    
+		<div class="uk-align-center" style="width: 250px;">
+			<form class="uk-panel uk-panel-box uk-form" id="register" action="./signup" method="post">
+				<div class="uk-form-row">
+					<input class="uk-input" type="text" name="username" placeholder="Username">
+				</div>
+				<div class="uk-form-row">
+					<input class="uk-input" type="text" name="email" placeholder="Email">
+				</div>
+				<div class="uk-form-row">
+					<input class="uk-input" type="password" name="password" placeholder="Password">
+			</div>
+				<div class="uk-form-row">
+					<button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" form="register" type="submit">Login</button>
+				</div>
+		</form>
+		</div>
+    
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+    
+  </body>
+  
+</html>

@@ -1,10 +1,36 @@
 // Dependencies
 var express = require('express'),
   https = require("https"),
-  fs = require('fs')
+  bodyParser = require('body-parser'),
+  fs = require('fs'),
+  mongoose = require('mongoose'),
+  session = require('express-session'),
+  keys = require('./config/keys.js')
 
 // Express setup
 var app = express()
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+//Express session setup
+app.use(session({
+  secret: keys.secret,
+  cookie: {},
+  resave: true,
+  saveUninitialized: false
+}))
+
+//Express middleware for all routes to use session data
+app.use(function (req, res, next) {
+  res.locals.session = req.session
+  next()
+})
+
+//Connect to mongodb
+mongoose.connect(keys.mongodb.dbURI)
 
 //Set view engine as ejs
 app.set('view engine', 'ejs')

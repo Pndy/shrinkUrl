@@ -2,7 +2,9 @@ var router = require("express").Router();
 
 //Main route
 router.get('/', (req, res) => {
-    res.render('pages/index')
+    res.render('pages/index', {
+        session: req.session
+    })
 })
 
 //Info Route
