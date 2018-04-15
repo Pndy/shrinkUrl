@@ -3,6 +3,15 @@ var router = require("express").Router();
 var mongoose = require('mongoose');
 var User = require('../models/Users.js');
 
+const {
+    check,
+    validationResult
+} = require('express-validator/check');
+const {
+    matchedData,
+    sanitize
+} = require('express-validator/filter');
+
 //Main auth route
 router.get('/', (req, res) => {
     res.send('Hello auth')
@@ -40,12 +49,34 @@ router.get('/signup', (req, res) => {
     res.render('pages/signup')
 })
 //Signup post route
-router.post('/signup', (req, res) => {
-    //If user post'ed username, email and pass
-    if (req.body.username &&
-        req.body.email &&
-        req.body.password) {
-        //Creating new user from user schema
+router.post('/signup', [
+    check('email')
+    .exists()
+    .isEmail().withMessage('must be an valid email'),
+
+    check('password')
+    .exists()
+    .isLength({
+        min: 5,
+        max: 128
+    }).withMessage('Password has to be min 5 characters long'),
+
+    check('username')
+    .exists()
+    .isAlphanumeric().withMessage('username can only contain letters and numbers')
+    .isLength({
+        min: 3,
+        max: 15
+    }).withMessage('username has to be between 3 and 15 characters long')
+
+], (req, res) => {
+    //Creating new user from user schema
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(422).json({
+            errors: errors.mapped()
+        });
+    } else {
         var cUser = new User({
             username: req.body.username,
             email: req.body.email,
@@ -58,9 +89,7 @@ router.post('/signup', (req, res) => {
         })
         //Redirect back to main page assuming everything went fine
         res.redirect('/')
-    } else {
-        //Redirect back to signup as users post wasnt correct
-        res.redirect('/a/signup')
+
     }
 })
 //Logout route
